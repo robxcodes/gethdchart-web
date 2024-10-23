@@ -7,10 +7,10 @@ const Home = () => {
   const { register, result } = useHdForm();
 
   return (
-    <Container>
-      <Stack>
+    <Container maxW="container.md" p="10">
+      <Stack direction="row" gap={4}>
         <HDForm register={register} />
-        {result && <HDChart hdValue={result} />}
+        <HDChart hdValue={result} />
       </Stack>
     </Container>
   )

@@ -18,7 +18,7 @@ export const useHdForm = () => {
 
   const result = useMemo(() => {
     if (!isValid) {
-      return null
+      return undefined;
     }
 
     return {
@@ -43,5 +43,6 @@ export const useHdForm = () => {
   return {
     register,
     result,
+    isValid,
   }
 }

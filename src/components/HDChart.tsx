@@ -1,6 +1,8 @@
+import { Alert, Button, Card, Flex, VStack } from '@chakra-ui/react';
 import { gates, centers } from '../utils/map';
 import { generate } from '../utils/tools';
 import { Centers, DefinedGateMap, HDValue } from '../utils/type';
+import { useRef } from 'react';
 
 const purple = '#342973';
 const white = '#FFFFFF';
@@ -8,6 +10,12 @@ const brokenWhite = '#F5F5F5';
 const grey = '#D9D9D9';
 const darkGrey = '#31243D';
 const red = '#D90A0A';
+
+const formatMap: Record<string, string> = {
+  png: 'image/png',
+  jpg: 'image/jpeg',
+  svg: 'image/svg+xml'
+}
 
 const generateGate = (gate: number, defined?: boolean) => {
   const { position } = gates[gate] || {};
@@ -21,13 +29,11 @@ const generateGate = (gate: number, defined?: boolean) => {
       <rect x={x} y={y} width={12} height={12} rx={6} fill={defined ? purple : 'none'} />
       <text
         x={x + 6}
-        y={y + 7}
+        y={y + 8.5}
         fill={defined ? brokenWhite : purple}
-        fontFamily="'Poppins', sans-serif"
-        fontWeight={600}
+        fontFamily="Helvetica, sans-serif"
         fontSize={7}
-        text-anchor="middle"
-        dominant-baseline="middle"
+        textAnchor="middle"
       >
         {gate}
       </text>
@@ -67,7 +73,7 @@ const generateChannel = (gate: number, gateMap?: DefinedGateMap) => {
         stroke={lineStroke}
         strokeWidth={6}
         transform={!!rotate ? `rotate(${-rotate}, ${x}, ${y})` : ''}
-        strokeLinecap={(isConnected && !alwaysRoundCap) ? 'square' : 'round'}
+        strokeLinecap={(isConnected && !alwaysRoundCap) ? 'butt' : 'round'}
       />
     </>
   );
@@ -92,15 +98,84 @@ const generateCenter = (name: Centers, isDefined?: boolean, definedGates?: numbe
   );
 }
 
-const HDChart = ({ hdValue }: { hdValue: HDValue }) => {
-  const result = generate(hdValue);
+const HDChart = ({ hdValue }: { hdValue?: HDValue }) => {
+  const svgRef = useRef<SVGSVGElement | null>(null);
+  const hasResult = !!hdValue;
+  const result = generate(hdValue || { design: {}, personality: {} });
 
-  return (
-    <svg width="330" height="552" viewBox="0 0 330 552" fill="none" xmlns="http://www.w3.org/2000/svg">
+  const svg = (
+    <svg ref={svgRef} style={{ userSelect: 'none', opacity: hasResult ? 1 : 0.5 }} width="330" height="552" viewBox="0 0 330 552" fill="none" xmlns="http://www.w3.org/2000/svg">
       {result.gates.open.map((undGate) => generateChannel(undGate))}
       {result.gates.defined.map((defGate) => generateChannel(defGate, result.gates.map[defGate]))}
       {Object.keys(centers).map((center) => generateCenter(center as Centers, result.centers.defined.includes(center as Centers), result.gates.defined))}
     </svg>
+  )
+
+  const generateSvg = () => {
+    if (!svgRef.current) return;
+
+    const svgData = new XMLSerializer().serializeToString(svgRef.current)
+    const svgDataBase64 = btoa('<?xml version="1.0" encoding="UTF-8"?>' + svgData)
+    return `data:image/svg+xml;charset=utf-8;base64,${svgDataBase64}`
+  }
+
+  const downloadSvg = () => {
+    const svgDataUrl = generateSvg()
+    if (!svgDataUrl) return;
+
+    const aBtn = document.createElement('a');
+    aBtn.href = svgDataUrl;
+    aBtn.download = 'hd-chart.svg';
+    aBtn.click();
+  }
+
+  const downloadImage = (format: string) => {
+    const svgDataUrl = generateSvg()
+    if (!svgDataUrl) return;
+
+    const image = new Image()
+
+    image.addEventListener('load', () => {
+      const canvas = document.createElement('canvas')
+
+      canvas.width = 1320;
+      canvas.height = 2208;
+
+      const context = canvas.getContext('2d')
+      if (!context) return;
+      context.font = "600 7px 'Poppins'";
+      context.fillText("text", 0, 7);
+      context.drawImage(image, 0, 0, 1320, 2208)
+
+      const dataUrl = canvas.toDataURL(formatMap[format])
+
+      const aBtn = document.createElement('a');
+      aBtn.href = dataUrl;
+      aBtn.download = `hd-chart.${format}`;
+      aBtn.click();
+    })
+
+    image.src = svgDataUrl;
+
+  };
+
+  return (
+    <Card flex="1" position="relative" width="auto" p="4" alignItems="center">
+      {svg}
+      {hasResult ? (
+        <VStack position="absolute" top="4" right="4" gap="1">
+          <Button size="sm" onClick={() => downloadSvg()}>
+            📥 SVG
+          </Button>
+          <Button size="sm" onClick={() => downloadImage('png')}>
+            📥 PNG
+          </Button>
+        </VStack>
+      ) : (
+        <Alert position="absolute" top="150px">Please complete input</Alert>
+      )}
+
+    </Card>
   )
 }
 

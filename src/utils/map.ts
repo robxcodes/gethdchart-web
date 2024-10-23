@@ -1,6 +1,5 @@
 import { CenterMeta, Centers, GateMeta } from "./type"
 
-
 export const planets = [
   ['sun', '☉'],
   ['earth', '🜨'],
@@ -20,20 +19,20 @@ export const planets = [
 export const centers: Record<Centers, CenterMeta> = {
   head: {
     size: { width: 76, height: 60 },
-    position: { x: 125, y: 1 },
+    position: { x: 126, y: 1 },
     gates: [64, 61, 63],
     color: 'F3C13F',
     radius: 2,
-    vector: 'M 0 60 L 38 0 L 76 60 Z',
+    vector: 'M 35 3 L 2 55 C 1 57 2 60 5 60 L 71 60 C 74 60 75 57 74 55 L 41 3 C 39 1 37 1 35 3 Z',
     
   },
   mind: {
     size: { width: 76, height: 60 },
-    position: { x: 125, y: 75 },
+    position: { x: 126, y: 75 },
     gates: [47, 24, 4, 17, 11, 43],
     color: '4FD21F',
     radius: 2,
-    vector: 'M 0 0 L 38 60 L 76 0 Z',
+    vector: 'M 4 0 C 1 0 0 3 1 5 L 34 57 C 36 59 38 59 40 57 L 73 5 C 74 3 73 0 70 0 L 4 0 Z',
   },
   throat: {
     size: { width: 66, height: 66 },
@@ -41,31 +40,31 @@ export const centers: Record<Centers, CenterMeta> = {
     gates: [62, 23, 56, 35, 12, 45, 33, 8, 31, 20, 16],
     color: 'F3893F',
     radius: 4,
-    vector: 'M 66 0 L 0 0 L 0 66 L 66 66 Z',
+    vector: 'M 66 5 C 66 2 64 0 61 0 L 5 0 C 2 0 0 2 0 5 L 0 61 C 0 64 2 66 5 66 L 61 66 C 64 66 66 64 66 61 L 66 5 Z',
   },
   g: {
     size: { width: 82, height: 82 },
-    position: { x: 122, y: 244 },
+    position: { x: 123, y: 245 },
     gates: [1, 13, 25, 46, 2, 15, 10, 7],
     color: 'F3C13F',
     radius: 4,
-    vector: 'M 0 41 L 41 82 L 82 41 L 41 0 Z'
+    vector: 'M 2 44 L 36 78 C 38 80 42 80 44 78 L 78 44 C 80 42 80 38 78 36 L 44 2 C 42 0 38 0 36 2 L 2 36 C 0 38 0 42 2 44 Z'
   },
   heart: {
     size: { width: 76, height: 44 },
-    position: { x: 205, y: 299 },
+    position: { x: 207, y: 300 },
     gates: [26, 51, 21, 40],
     color: 'F76E76',
     radius: 2,
-    vector: 'M 0 44 L 38 0 L 76 44 Z'
+    vector: 'M 1 38 C 0 40 1 43 3 43 L 69 43 C 71 43 73 40 71 38 L 38 1 C 37 0 35 0 34 1 L 1 38 Z'
   },
   spleen: {
     size: { width: 60, height: 76 },
-    position: { x: 1, y: 351 },
+    position: { x: 1, y: 352 },
     gates: [48, 57, 44, 50, 32, 28, 18],
     color: 'F3893F',
     radius: 2,
-    vector: 'M 0 0 L 60 38 L 0 76 Z'
+    vector: 'M 5 1 C 3 0 0 1 0 4 L 0 70 C 0 73 3 74 5 73 L 57 40 C 59 38 59 36 57 34 L 5 1 Z'
   },
   sacral: {
     size: { width: 66, height: 66 },
@@ -73,15 +72,15 @@ export const centers: Record<Centers, CenterMeta> = {
     gates: [5, 14, 29, 59, 9, 3, 42, 27, 34],
     color: 'F76E76',
     radius: 4,
-    vector: 'M 66 0 L 0 0 L 0 66 L 66 66 Z',
+    vector: 'M 66 5 C 66 2 64 0 61 0 L 5 0 C 2 0 0 2 0 5 L 0 61 C 0 64 2 66 5 66 L 61 66 C 64 66 66 64 66 61 L 66 5 Z',
   },
   esp: {
     size: { width: 60, height: 76 },
-    position: { x: 266, y: 351 },
+    position: { x: 267, y: 352 },
     gates: [6, 37, 22, 36, 30, 55, 49],
     color: 'F3893F',
     radius: 2,
-    vector: 'M 60 76 L 0 38 L 60 0 Z'
+    vector: 'M 54 73 C 56 74 59 73 59 70 L 59 4 C 59 1 56 0 54 1 L 2 34 C 0 36 0 38 2 40 L 54 73 Z'
   },
   root: {
     size: { width: 66, height: 66 },
@@ -89,7 +88,7 @@ export const centers: Record<Centers, CenterMeta> = {
     gates: [58, 38, 54, 53, 60, 52, 19, 39, 41],
     color: 'F3893F',
     radius: 4,
-    vector: 'M 66 0 L 0 0 L 0 66 L 66 66 Z',
+    vector: 'M 66 5 C 66 2 64 0 61 0 L 5 0 C 2 0 0 2 0 5 L 0 61 C 0 64 2 66 5 66 L 61 66 C 64 66 66 64 66 61 L 66 5 Z',
   },
 }
 
@@ -136,28 +135,28 @@ export const gates: Record<number, GateMeta> = {
   // head
   64: {
     position: { x: 142, y: 47 },
-    channel: { x: 148, y: 70, length: 12, rotate: 90 }
+    channel: { x: 148, y: 68, length: 12, rotate: 90 }
   },
   61: {
     position: { x: 157, y: 47 },
-    channel: { x: 163, y: 70, length: 12, rotate: 90 }
+    channel: { x: 163, y: 68, length: 12, rotate: 90 }
   },
   63: {
     position: { x: 172, y: 47 },
-    channel: { x: 178, y: 70, length: 12, rotate: 90 }
+    channel: { x: 178, y: 68, length: 12, rotate: 90 }
   },
   // mind
   47: {
     position: { x: 142, y: 77 },
-    channel: { x: 148, y: 82, length: 12, rotate: 90 }
+    channel: { x: 148, y: 80, length: 12, rotate: 90 }
   },
   24: {
     position: { x: 157, y: 77 },
-    channel: { x: 163, y: 82, length: 12, rotate: 90 }
+    channel: { x: 163, y: 80, length: 12, rotate: 90 }
   },
   4: {
     position: { x: 172, y: 77 },
-    channel: { x: 178, y: 82, length: 12, rotate: 90 }
+    channel: { x: 178, y: 80, length: 12, rotate: 90 }
   },
   17: {
     position: { x: 145, y: 96 },
@@ -178,7 +177,7 @@ export const gates: Record<number, GateMeta> = {
   },
   23: {
     position: { x: 157, y: 150 },
-    channel: { x: 163, y: 156, length: 15, rotate: 90 }
+    channel: { x: 163, y: 155, length: 15, rotate: 90 }
   },
   56: {
     position: { x: 172, y: 150 },
@@ -334,7 +333,7 @@ export const gates: Record<number, GateMeta> = {
   },
   // esp
   6: {
-    position: { x: 275, y: 383 },
+    position: { x: 274, y: 383 },
     channel: { x: 278, y: 392, length: 54, rotate: -155 },
   },
   37: {
