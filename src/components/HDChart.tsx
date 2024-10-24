@@ -1,8 +1,9 @@
-import { Alert, Button, Card, Flex, VStack } from '@chakra-ui/react';
+import { Alert, Button, Card, Flex, Tag, TagLabel, Text, VStack } from '@chakra-ui/react';
 import { gates, centers } from '../utils/map';
 import { generate } from '../utils/tools';
 import { Centers, DefinedGateMap, HDValue } from '../utils/type';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
+import ColorPicker from './ColorPicker';
 
 const purple = '#342973';
 const white = '#FFFFFF';
@@ -79,29 +80,44 @@ const generateChannel = (gate: number, gateMap?: DefinedGateMap) => {
   );
 }
 
-const generateCenter = (name: Centers, isDefined?: boolean, definedGates?: number[]) => {
-  const { position, gates: centerGates, color, vector } = centers[name] || {};
-
-  return (
-    <g>
-      <path
-        d={vector}
-        fill={isDefined ? `#${color}` : white}
-        strokeWidth={2}
-        strokeLinejoin="round"
-        strokeLinecap="round"
-        stroke={`#${color}`}
-        transform={`translate(${position?.x}, ${position?.y})`}
-      />
-      {centerGates.map((gate) => generateGate(gate, definedGates?.includes(gate)))}
-    </g>
-  );
-}
-
 const HDChart = ({ hdValue }: { hdValue?: HDValue }) => {
   const svgRef = useRef<SVGSVGElement | null>(null);
   const hasResult = !!hdValue;
   const result = generate(hdValue || { design: {}, personality: {} });
+
+  const [colors, setColors] = useState<Record<string, string>>(Object.keys(centers).reduce(
+    (colorMap, key) => ({
+      ...colorMap,
+      [key]: `#${centers[key as Centers].color}`
+    }),
+    {}
+  ))
+
+  const handleColorChange = (label: string) => (value: string) => setColors(
+    (colors) => ({ ...colors, [label]: value })
+  )
+
+  const generateCenter = (name: Centers, isDefined?: boolean, definedGates?: number[]) => {
+    const { position, gates: centerGates, vector } = centers[name] || {};
+
+    const color = colors[name];
+
+    return (
+      <g>
+        <path
+          d={vector}
+          fill={isDefined ? color : white}
+          strokeWidth={2}
+          strokeLinejoin="round"
+          strokeLinecap="round"
+          stroke={color}
+          transform={`translate(${position?.x}, ${position?.y})`}
+        />
+        {centerGates.map((gate) => generateGate(gate, definedGates?.includes(gate)))}
+      </g>
+    );
+  }
+
 
   const svg = (
     <svg ref={svgRef} style={{ userSelect: 'none', opacity: hasResult ? 1 : 0.5 }} width="330" height="552" viewBox="0 0 330 552" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -162,6 +178,14 @@ const HDChart = ({ hdValue }: { hdValue?: HDValue }) => {
   return (
     <Card flex="1" position="relative" width="auto" p="4" alignItems="center">
       {svg}
+      {hasResult && (
+        <VStack position="absolute" top="4" left="4" gap="1" alignItems="flex-start">
+          <Text textStyle="xs">Change colors:</Text>
+          {Object.entries(colors).map(
+            ([label, value]) => <ColorPicker label={label} value={value} onChange={handleColorChange(label)} />
+          )}
+        </VStack>
+      )}
       {hasResult ? (
         <VStack position="absolute" top="4" right="4" gap="1">
           <Button size="sm" onClick={() => downloadSvg()}>
