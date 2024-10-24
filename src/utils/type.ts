@@ -17,7 +17,6 @@ export interface CenterMeta {
   gates: number[],
   color: string,
   vector: string,
-  radius: 2 | 4,
 }
 
 export interface ChannelMeta {
