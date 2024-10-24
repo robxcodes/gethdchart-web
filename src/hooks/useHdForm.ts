@@ -9,36 +9,19 @@ export interface HDFormType {
 export const useHdForm = () => {
   const {
     register,
-    getValues,
+    watch,
     formState: { isValid },
   } = useForm<HDFormType>()
 
-  const designValues = getValues('design');
-  const personalityValues = getValues('personality');
+  const designValues = watch('design');
+  const personalityValues = watch('personality');
 
-  const result = useMemo(() => {
-    if (!isValid) {
-      return undefined;
-    }
+  const result = (!isValid) ? undefined : {
+    design: designValues,
+    personality: personalityValues,
+  };
 
-    return {
-      design: Object.entries(designValues).reduce(
-        (designMap, [key, val]) => ({
-          ...designMap,
-          [key]: val.split('.').map(Number)
-        }),
-        {}
-      ),
-      personality: Object.entries(personalityValues).reduce(
-        (personalityMap, [key, val]) => ({
-          ...personalityMap,
-          [key]: val.split('.').map(Number)
-        }),
-        {}
-      )
-    }
-
-  }, [isValid, designValues, personalityValues])
+  console.log('FORM', result)
 
   return {
     register,

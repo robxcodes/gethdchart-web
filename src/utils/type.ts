@@ -1,6 +1,6 @@
 export interface HDValue {
-  design: Record<string, [number, number]>,
-  personality: Record<string, [number, number]>,
+  design?: Record<string, string>,
+  personality?: Record<string, string>,
 }
 
 export interface DefinedGateMap {

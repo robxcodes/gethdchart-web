@@ -18,13 +18,15 @@ export const generate = (value: HDValue) => {
   const definedGateMap: Record<number, DefinedGateMap> = {};
 
   const { design, personality } = value;
-  Object.values(design).forEach(([gate]) => {
+  Object.values(design || {}).forEach((input) => {
+    const [gate] = input.split(',').map(Number);
     definedGateMap[gate] = {
       ...(definedGateMap[gate] || {}),
       isDesign: true,
     }
   })
-  Object.values(personality).forEach(([gate]) => {
+  Object.values(personality || {}).forEach((input) => {
+    const [gate] = input.split(',').map(Number);
     definedGateMap[gate] = {
       ...(definedGateMap[gate] || {}),
       isPersonality: true,

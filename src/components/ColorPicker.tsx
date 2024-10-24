@@ -1,4 +1,4 @@
-import { Box, Button, Heading, HStack, Popover, PopoverArrow, PopoverBody, PopoverContent, PopoverTrigger, Text, VStack } from "@chakra-ui/react"
+import { Box, Button, Heading, HStack, Input, Popover, PopoverArrow, PopoverBody, PopoverContent, PopoverTrigger, VStack } from "@chakra-ui/react"
 import { ColorResult, Colorful } from '@uiw/react-color';
 import { centers } from "../utils/map";
 import { Centers } from "../utils/type";
@@ -24,7 +24,7 @@ const ColorPicker = ({ label, value, onChange }: IColorPickerProps) => {
         <HStack>
           <Colorful color={value} onChange={handleColorChange} />
           <VStack>
-            <Text textStyle="xl">{value.toUpperCase()}</Text>
+            <Input width="24" value={value.toUpperCase()} onChange={(e) => onChange(e.currentTarget.value)} />
             <Button variant="link" onClick={() => onChange(`#${centers[label as Centers].color}`)}>
               Reset
             </Button>

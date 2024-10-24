@@ -1,4 +1,4 @@
-import { Alert, Button, Card, Flex, Tag, TagLabel, Text, VStack } from '@chakra-ui/react';
+import { Alert, Button, Card, Text, VStack } from '@chakra-ui/react';
 import { gates, centers } from '../utils/map';
 import { generate } from '../utils/tools';
 import { Centers, DefinedGateMap, HDValue } from '../utils/type';
@@ -64,8 +64,8 @@ const generateChannel = (gate: number, gateMap?: DefinedGateMap) => {
       {(isPersonality && isDesign) && (
         <defs>
           <linearGradient id={`channelGradient${gate}`} x1={x} y1={y - 3} x2={x} y2={y + 3} gradientUnits="userSpaceOnUse" >
-            <stop offset="0%" stop-color={darkGrey} />
-            <stop offset="100%" stop-color={red} />
+            <stop offset="0%" stopColor={darkGrey} />
+            <stop offset="100%" stopColor={red} />
           </linearGradient>
         </defs>
       )}
@@ -80,10 +80,10 @@ const generateChannel = (gate: number, gateMap?: DefinedGateMap) => {
   );
 }
 
-const HDChart = ({ hdValue }: { hdValue?: HDValue }) => {
+const HDChart = ({ design, personality }: HDValue) => {
   const svgRef = useRef<SVGSVGElement | null>(null);
-  const hasResult = !!hdValue;
-  const result = generate(hdValue || { design: {}, personality: {} });
+  const hasResult = !!design || !!personality;
+  const result = generate({ design, personality });
 
   const [colors, setColors] = useState<Record<string, string>>(Object.keys(centers).reduce(
     (colorMap, key) => ({
@@ -180,7 +180,7 @@ const HDChart = ({ hdValue }: { hdValue?: HDValue }) => {
       {svg}
       {hasResult && (
         <VStack position="absolute" top="4" left="4" gap="1" alignItems="flex-start">
-          <Text textStyle="xs">Change colors:</Text>
+          <Text as="b" fontSize="xs">Change colors</Text>
           {Object.entries(colors).map(
             ([label, value]) => <ColorPicker label={label} value={value} onChange={handleColorChange(label)} />
           )}
@@ -188,6 +188,7 @@ const HDChart = ({ hdValue }: { hdValue?: HDValue }) => {
       )}
       {hasResult ? (
         <VStack position="absolute" top="4" right="4" gap="1">
+          <Text as="b" fontSize="xs">Download</Text>
           <Button size="sm" onClick={() => downloadSvg()}>
             📥 SVG
           </Button>

@@ -225,7 +225,7 @@ export const gates: Record<number, GateMeta> = {
   // g
   7: {
     position: { x: 142, y: 264 },
-    channel: { x: 148, y: 269, length: 35, rotate: 90 }
+    channel: { x: 148, y: 267, length: 35, rotate: 90 }
   },
   1: {
     position: { x: 157, y: 249 },
@@ -233,7 +233,7 @@ export const gates: Record<number, GateMeta> = {
   },
   13: {
     position: { x: 172, y: 264 },
-    channel: { x: 178, y: 269, length: 35, rotate: 90 }
+    channel: { x: 178, y: 267, length: 35, rotate: 90 }
   },
   25: {
     position: { x: 187, y: 279 },
@@ -258,7 +258,7 @@ export const gates: Record<number, GateMeta> = {
   // sacral
   5: {
     position: { x: 142, y: 390 },
-    channel: { x: 148, y: 393, length: 40, rotate: 90 },
+    channel: { x: 148, y: 390, length: 40, rotate: 90 },
   },
   14: {
     position: { x: 157, y: 390 },

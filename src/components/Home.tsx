@@ -10,7 +10,7 @@ const Home = () => {
     <Container maxW="container.md" p="10">
       <Stack direction="row" gap={4}>
         <HDForm register={register} />
-        <HDChart hdValue={result} />
+        <HDChart design={result?.design} personality={result?.personality} />
       </Stack>
     </Container>
   )
