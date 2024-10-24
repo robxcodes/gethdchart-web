@@ -23,8 +23,7 @@ export const centers: Record<Centers, CenterMeta> = {
     gates: [64, 61, 63],
     color: 'F3C13F',
     radius: 2,
-    vector: 'M 35 3 L 2 55 C 1 57 2 60 5 60 L 71 60 C 74 60 75 57 74 55 L 41 3 C 39 1 37 1 35 3 Z',
-    
+    vector: 'M 3 60 C 1 60 0 57 1 55 L 34 3 C 36 0 38 0 40 3 L 73 55 C 74 57 73 60 70 60 L 3 60 Z',
   },
   mind: {
     size: { width: 76, height: 60 },
@@ -32,7 +31,7 @@ export const centers: Record<Centers, CenterMeta> = {
     gates: [47, 24, 4, 17, 11, 43],
     color: '4FD21F',
     radius: 2,
-    vector: 'M 4 0 C 1 0 0 3 1 5 L 34 57 C 36 59 38 59 40 57 L 73 5 C 74 3 73 0 70 0 L 4 0 Z',
+    vector: 'M 3 0 C 1 0 0 3 1 5 L 34 57 C 36 60 38 60 40 57 L 73 5 C 74 3 73 0 70 0 L 3 0 Z',
   },
   throat: {
     size: { width: 66, height: 66 },
