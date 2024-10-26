@@ -199,7 +199,7 @@ export const gates: Record<number, GateMeta> = {
   },
   20: {
     position: { x: 132, y: 176 },
-    channel: { x: 136, y: 175, length: 190, rotate: -120, alwaysRoundCap: true }
+    channel: { x: 42, y: 338, length: 190, rotate: 60, alwaysRoundCap: true }
   },
   16: {
     position: { x: 132, y: 162 },
@@ -253,7 +253,7 @@ export const gates: Record<number, GateMeta> = {
   },
   10: {
     position: { x: 127, y: 279 },
-    channel: { x: 132, y: 287, length: 104, rotate: -150, alwaysRoundCap: true }
+    channel: {  x: 42, y: 338, length: 104, rotate: 30, alwaysRoundCap: true }
   },
   // sacral
   5: {
@@ -290,7 +290,7 @@ export const gates: Record<number, GateMeta> = {
   },
   34: {
     position: { x: 132, y: 402 },
-    channel: { x: 41, y: 340, length: 116, rotate: -35, alwaysRoundCap: true },
+    channel: { x: 42, y: 338, length: 116, rotate: -35, alwaysRoundCap: true },
   },
   // spleen
   48: {
